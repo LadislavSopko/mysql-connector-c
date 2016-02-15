@@ -252,6 +252,15 @@ IF(NOT DISABLE_SHARED)
   MERGE_LIBRARIES(libmysql SHARED ${LIBS}
     EXPORTS ${CLIENT_API_FUNCTIONS}
     COMPONENT SharedLibraries)
+	
+	IF(WIN32)
+		install( TARGETS libmysql
+			RUNTIME DESTINATION  "${CMAKE_INSTALL_PREFIX}/bin"
+			COMPONENT SharedLibraries
+		)
+	endif()
+	
+	
   IF(UNIX)
     # libtool compatability
     IF(CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR APPLE)
